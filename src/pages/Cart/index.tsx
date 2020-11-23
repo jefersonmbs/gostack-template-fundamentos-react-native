@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
+
+import EmojiSad from '../../assets/emojiSad.gif';
 
 import {
   Container,
@@ -39,27 +41,39 @@ const Cart: React.FC = () => {
   const { increment, decrement, products } = useCart();
 
   function handleIncrement(id: string): void {
-    // TODO
+    increment(id);
   }
 
   function handleDecrement(id: string): void {
-    // TODO
+    decrement(id);
   }
 
   const cartTotal = useMemo(() => {
-    // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const calculaTotal = products.reduce(
+      (total, product: Product) => total + product.quantity * product.price,
+      0,
+    );
 
-    return formatValue(0);
+    return formatValue(calculaTotal);
   }, [products]);
 
   const totalItensInCart = useMemo(() => {
-    // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const calculaQuantity = products.reduce(
+      (total, product: Product) => total + product.quantity,
+      0,
+    );
 
-    return 0;
+    return calculaQuantity;
   }, [products]);
 
   return (
     <Container>
+      {products.length === 0 ? (
+        <Image
+          source={EmojiSad}
+          style={{ marginTop: 230, backgroundColor: '#FFFF00', opacity: 0.2 }}
+        />
+      ) : null}
       <ProductContainer>
         <ProductList
           data={products}
@@ -105,6 +119,7 @@ const Cart: React.FC = () => {
           )}
         />
       </ProductContainer>
+
       <TotalProductsContainer>
         <FeatherIcon name="shopping-cart" color="#fff" size={24} />
         <TotalProductsText>{`${totalItensInCart} itens`}</TotalProductsText>

@@ -5,7 +5,7 @@ export const Container = styled.View`
   bottom: 0px;
 
   flex-direction: row;
-  background: #e83f5b;
+  background: black;
 
   padding: 0 20px;
   justify-content: space-between;
@@ -24,8 +24,7 @@ export const CartTotalPrice = styled.Text`
 
 export const CartButton = styled.TouchableOpacity`
   flex-direction: row;
-  background: #e83f5b;
-
+  background: black;
   flex: 1;
   padding: 20px 20px;
   justify-content: space-between;
